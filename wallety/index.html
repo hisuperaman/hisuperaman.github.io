@@ -5,6 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wallety - Download</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta property="og:title" content="Wallety">
+    <meta property="og:description" content="A minimal, privacy-first expense tracker Android app.">
+    <meta property="og:image" content="./favicon.png">
+    <meta property="og:url" content="https://hisuperaman.me/wallety">
+    <meta property="og:type" content="website">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .phone-frame {
@@ -118,7 +125,9 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         .btn-loading {
@@ -171,6 +180,7 @@
                 transform: translateX(400px);
                 opacity: 0;
             }
+
             to {
                 transform: translateX(0);
                 opacity: 1;
@@ -182,6 +192,7 @@
                 transform: translateX(0);
                 opacity: 1;
             }
+
             to {
                 transform: translateX(400px);
                 opacity: 0;
@@ -206,7 +217,8 @@
                 </div>
                 <span class="font-semibold text-lg">Wallety</span>
             </div>
-            <a href="support.html" class="bg-gray-900 text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-800 transition">
+            <a href="support.html"
+                class="bg-gray-900 text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-800 transition">
                 Support
             </a>
         </div>
@@ -280,7 +292,9 @@
 
             <!-- Description -->
             <p class="text-gray-600 mb-6 leading-relaxed">
-                Wallety is currently in <span class="font-semibold">closed beta testing</span>. If you want to back up your app data to your Google account, please provide your email address. This helps me (the developer) grant you access to the backup feature.
+                Wallety is currently in <span class="font-semibold">closed beta testing</span>. If you want to back up
+                your app data to your Google account, please provide your email address. This helps me (the developer)
+                grant you access to the backup feature.
             </p>
 
             <form id="downloadForm" action="https://api.web3forms.com/submit" method="POST">
@@ -288,7 +302,8 @@
                 <div class="mb-6">
                     <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
                     <input type="email" id="email" name="email" placeholder="john@doe.com"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900" required>
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
+                        required>
                 </div>
 
                 <!-- Submit Button -->
@@ -319,7 +334,8 @@
             </div>
             <div class="flex justify-between mt-4 sm:mt-0">
                 <p class="text-gray-600 text-xs">© All rights reserved.</p>
-                <p class="text-xs">Developed with ❤️ by <a href='https://github.com/hisuperaman' target="_blank" class="text-gray-700 hover:text-gray-900">hisuperaman</a></p>
+                <p class="text-xs">Developed with ❤️ by <a href='https://github.com/hisuperaman' target="_blank"
+                        class="text-gray-700 hover:text-gray-900">hisuperaman</a></p>
             </div>
         </div>
     </footer>
@@ -331,9 +347,9 @@
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
             toast.textContent = message;
-            
+
             toastContainer.appendChild(toast);
-            
+
             setTimeout(() => {
                 toast.classList.add('removing');
                 setTimeout(() => {
@@ -373,44 +389,44 @@
         // Handle form submission
         downloadForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            
+
             // Disable button and show loader
             submitBtn.disabled = true;
             submitBtn.classList.add('btn-loading');
             const originalText = submitBtn.textContent;
             submitBtn.innerHTML = '<span class="loader"></span>Submitting...';
-            
+
             // Submit to web3forms
             const formData = new FormData(downloadForm);
-            
+
             fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    triggerDownload();
-                    closeModal();
-                    // Reset button
-                    submitBtn.disabled = false;
-                    submitBtn.classList.remove('btn-loading');
-                    submitBtn.textContent = originalText;
-                } else {
-                    console.error('Form submission error:', data);
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        triggerDownload();
+                        closeModal();
+                        // Reset button
+                        submitBtn.disabled = false;
+                        submitBtn.classList.remove('btn-loading');
+                        submitBtn.textContent = originalText;
+                    } else {
+                        console.error('Form submission error:', data);
+                        // Reset button and show error
+                        submitBtn.disabled = false;
+                        submitBtn.classList.remove('btn-loading');
+                        submitBtn.textContent = originalText;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
                     // Reset button and show error
                     submitBtn.disabled = false;
                     submitBtn.classList.remove('btn-loading');
                     submitBtn.textContent = originalText;
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                // Reset button and show error
-                submitBtn.disabled = false;
-                submitBtn.classList.remove('btn-loading');
-                submitBtn.textContent = originalText;
-            });
+                });
         });
 
         // Download anyway
