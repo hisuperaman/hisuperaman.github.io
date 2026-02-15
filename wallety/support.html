@@ -89,10 +89,98 @@
         .form-button:hover {
             background: #0a0c0d;
         }
+
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            background: white;
+            padding: 16px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-left: 4px solid #212529;
+            animation: slideIn 0.3s ease-out;
+            max-width: 350px;
+            word-wrap: break-word;
+        }
+
+        .toast.success {
+            border-left-color: #28a745;
+            background: #f0f9f7;
+            color: #155724;
+        }
+
+        .toast.error {
+            border-left-color: #dc3545;
+            background: #fef5f5;
+            color: #721c24;
+        }
+
+        .toast.info {
+            border-left-color: #17a2b8;
+            background: #f0f9fb;
+            color: #0c5460;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+
+        .toast.removing {
+            animation: slideOut 0.3s ease-out forwards;
+        }
+
+        .loader {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .btn-loading {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 
 <body class="bg-white text-gray-900">
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
     <!-- Navigation -->
     <nav class="border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -128,7 +216,8 @@
                     <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-8">
                         <h2 class="text-2xl font-bold mb-6">Send us Your Feedback</h2>
 
-                        <form id="feedbackForm" class="space-y-6">
+                        <form id="feedbackForm" action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
+                            <input type="hidden" name="access_key" value="f09237c0-fb6f-4310-b7b7-1ebe6c860f85">
                             <!-- Name Field -->
                             <div>
                                 <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
@@ -177,7 +266,7 @@
                 <!-- Right - FAQ Accordion -->
                 <div class="lg:col-span-1">
                     <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-8">
-                        <h2 class="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
+                        <h2 class="text-2xl font-bold mb-6">FAQ</h2>
 
                         <div class="space-y-2">
                             <!-- FAQ Item 1 -->
@@ -187,7 +276,7 @@
                                     <span class="accordion-icon">▼</span>
                                 </button>
                                 <div class="accordion-content" data-accordion="0">
-                                    Use the on-screen numpad, select type, category, date, and comment, then tap ✅.
+                                    Use the on-screen numpad, select type, category, date, and comment, then tap 'check' button.
                                 </div>
                             </div>
 
@@ -198,7 +287,9 @@
                                     <span class="accordion-icon">▼</span>
                                 </button>
                                 <div class="accordion-content" data-accordion="1">
-                                    Tap the transaction, then use the delete or edit options.
+                                    To edit, tap on a transaction to open the edit screen. Make your changes and tap the 'check' button to save.
+                                    <br>
+                                    To delete, tap and hold the backspace button in numpad until the icon changes to a trash can, then release it.
                                 </div>
                             </div>
 
@@ -209,7 +300,7 @@
                                     <span class="accordion-icon">▼</span>
                                 </button>
                                 <div class="accordion-content" data-accordion="2">
-                                    Sign in with Google and tap "Backup" to save your data to your Drive. You can also enable automatic backups.
+                                    After signing in with Google, go to Backup & Restore settings screen and tap "Backup". You can also enable automatic backups.
                                 </div>
                             </div>
 
@@ -220,7 +311,7 @@
                                     <span class="accordion-icon">▼</span>
                                 </button>
                                 <div class="accordion-content" data-accordion="3">
-                                    Tap "Restore" and choose a backup from your Google Drive.
+                                    After signing in with the same Google account, go to Backup & Restore settings screen and tap "Restore".
                                 </div>
                             </div>
                         </div>
@@ -231,18 +322,38 @@
     </div>
 
     <!-- Footer -->
-    <footer class="border-t border-gray-200 bg-white py-12">
+    <footer class="border-t border-gray-200 bg-white py-8">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <p class="text-gray-600 mb-2">© 2026 Wallety. All rights reserved.</p>
             <div class="flex justify-center gap-8 text-sm text-gray-500">
                 <a href="privacy-policy.html" class="hover:text-gray-700 transition">Privacy</a>
                 <a href="terms-and-conditions.html" class="hover:text-gray-700 transition">Terms</a>
                 <a href="support.html" class="hover:text-gray-700 transition">Support</a>
             </div>
+            <div class="flex justify-between mt-4 sm:mt-0">
+                <p class="text-gray-600 text-xs">© All rights reserved.</p>
+                <p class="text-xs">Developed with ❤️ by <a href='https://github.com/hisuperaman' target="_blank" class="text-gray-700 hover:text-gray-900">hisuperaman</a></p>
+            </div>
         </div>
     </footer>
 
     <script>
+        // Toast notification function
+        function showToast(message, type = 'info', duration = 4000) {
+            const toastContainer = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            
+            toastContainer.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('removing');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, duration);
+        }
+
         // Accordion functionality
         const accordionButtons = document.querySelectorAll('.accordion-button');
 
@@ -272,20 +383,46 @@
 
         // Form handling
         const feedbackForm = document.getElementById('feedbackForm');
+        const submitButton = feedbackForm.querySelector('button[type="submit"]');
 
         feedbackForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-
-            console.log('Feedback submitted:', { name, email, message });
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.classList.add('btn-loading');
+            const originalText = submitButton.textContent;
+            submitButton.innerHTML = '<span class="loader"></span>' + originalText;
             
-            // Here you can add your form submission logic
-            // For now, show a success message
-            alert('Thank you for your feedback! We\'ll get back to you soon.');
-            feedbackForm.reset();
+            const formData = new FormData(feedbackForm);
+            
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showToast('Thank you for your feedback! We\'ll get back to you soon.', 'success');
+                    feedbackForm.reset();
+                    submitButton.disabled = false;
+                    submitButton.classList.remove('btn-loading');
+                    submitButton.textContent = originalText;
+                } else {
+                    console.error('Form submission error:', data);
+                    showToast('There was an error submitting your feedback. Please try again.', 'error');
+                    submitButton.disabled = false;
+                    submitButton.classList.remove('btn-loading');
+                    submitButton.textContent = originalText;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showToast('There was an error submitting your feedback. Please try again.', 'error');
+                submitButton.disabled = false;
+                submitButton.classList.remove('btn-loading');
+                submitButton.textContent = originalText;
+            });
         });
     </script>
 </body>

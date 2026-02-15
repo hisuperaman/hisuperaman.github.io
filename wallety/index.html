@@ -105,10 +105,98 @@
         .modal-close {
             cursor: pointer;
         }
+
+        .loader {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .btn-loading {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            background: white;
+            padding: 16px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-left: 4px solid #212529;
+            animation: slideIn 0.3s ease-out;
+            max-width: 350px;
+            word-wrap: break-word;
+        }
+
+        .toast.success {
+            border-left-color: #28a745;
+            background: #f0f9f7;
+            color: #155724;
+        }
+
+        .toast.error {
+            border-left-color: #dc3545;
+            background: #fef5f5;
+            color: #721c24;
+        }
+
+        .toast.info {
+            border-left-color: #17a2b8;
+            background: #f0f9fb;
+            color: #0c5460;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+
+        .toast.removing {
+            animation: slideOut 0.3s ease-out forwards;
+        }
     </style>
 </head>
 
 <body class="bg-white text-gray-900">
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
     <!-- Navigation -->
     <nav class="border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -125,7 +213,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <div class="min-h-screen bg-gradient-to-b from-white to-gray-50 flex items-center">
+    <div class="min-h-screen bg-gradient-to-b from-white to-gray-50 flex items-center pb-8">
         <div class="pt-8 lg:pt-0 max-w-7xl mx-auto px-6 w-full">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <!-- Left Content -->
@@ -184,7 +272,7 @@
         <div class="modal-content">
             <!-- Close Button -->
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold">Backup Your Data</h2>
+                <h2 class="text-2xl font-bold">Download Wallety</h2>
                 <button id="closeModalBtn" class="modal-close text-2xl text-gray-500 hover:text-gray-700">
                     ✕
                 </button>
@@ -195,16 +283,16 @@
                 Wallety is currently in <span class="font-semibold">closed beta testing</span>. If you want to back up your app data to your Google account, please provide your email address. This helps me (the developer) grant you access to the backup feature.
             </p>
 
-            <!-- Form -->
-            <form id="downloadForm">
+            <form id="downloadForm" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="6e3d9365-f339-47c7-873d-100197033b9b">
                 <div class="mb-6">
                     <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
                     <input type="email" id="email" name="email" placeholder="john@doe.com"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900">
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900" required>
                 </div>
 
                 <!-- Submit Button -->
-                <button type="submit"
+                <button id="submitBtn" type="submit"
                     class="w-full bg-gray-900 text-white py-3 px-4 rounded-lg font-semibold hover:bg-gray-800 transition mb-4">
                     Submit Email and Download
                 </button>
@@ -222,24 +310,45 @@
     </div>
 
     <!-- Footer -->
-    <footer class="border-t border-gray-200 bg-white py-12">
+    <footer class="border-t border-gray-200 bg-white py-8">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <p class="text-gray-600 mb-2">© 2026 Wallety. All rights reserved.</p>
             <div class="flex justify-center gap-8 text-sm text-gray-500">
                 <a href="privacy-policy.html" class="hover:text-gray-700 transition">Privacy</a>
                 <a href="terms-and-conditions.html" class="hover:text-gray-700 transition">Terms</a>
                 <a href="support.html" class="hover:text-gray-700 transition">Support</a>
             </div>
+            <div class="flex justify-between mt-4 sm:mt-0">
+                <p class="text-gray-600 text-xs">© All rights reserved.</p>
+                <p class="text-xs">Developed with ❤️ by <a href='https://github.com/hisuperaman' target="_blank" class="text-gray-700 hover:text-gray-900">hisuperaman</a></p>
+            </div>
         </div>
     </footer>
 
     <script>
+        // Toast notification function
+        function showToast(message, type = 'info', duration = 4000) {
+            const toastContainer = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            
+            toastContainer.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('removing');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, duration);
+        }
+
         const downloadAndroidBtn = document.getElementById('downloadAndroidBtn');
         const downloadModal = document.getElementById('downloadModal');
         const closeModalBtn = document.getElementById('closeModalBtn');
         const downloadForm = document.getElementById('downloadForm');
         const downloadAnywayBtn = document.getElementById('downloadAnywayBtn');
         const emailInput = document.getElementById('email');
+        const submitBtn = document.getElementById('submitBtn');
 
         // Open modal
         downloadAndroidBtn.addEventListener('click', () => {
@@ -264,12 +373,44 @@
         // Handle form submission
         downloadForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const email = emailInput.value;
-            console.log('Email submitted:', email);
-            // Here you'll add web3forms action
-            // For now, just trigger download
-            triggerDownload();
-            closeModal();
+            
+            // Disable button and show loader
+            submitBtn.disabled = true;
+            submitBtn.classList.add('btn-loading');
+            const originalText = submitBtn.textContent;
+            submitBtn.innerHTML = '<span class="loader"></span>Submitting...';
+            
+            // Submit to web3forms
+            const formData = new FormData(downloadForm);
+            
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    triggerDownload();
+                    closeModal();
+                    // Reset button
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('btn-loading');
+                    submitBtn.textContent = originalText;
+                } else {
+                    console.error('Form submission error:', data);
+                    // Reset button and show error
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('btn-loading');
+                    submitBtn.textContent = originalText;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Reset button and show error
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('btn-loading');
+                submitBtn.textContent = originalText;
+            });
         });
 
         // Download anyway
@@ -280,14 +421,12 @@
 
         // Trigger download
         function triggerDownload() {
-            // Create a temporary link and trigger download
             const link = document.createElement('a');
-            link.href = '#'; // Replace with actual APK URL
-            link.download = 'wallety.apk';
+            link.href = './releases/wallety-1.0.apk';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            console.log('Download started');
+            showToast('Your download has begun. Thank you for installing!Download started', 'success');
         }
     </script>
 </body>
