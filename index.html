@@ -1,109 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hisuperaman</title>
+    <title>Aman | hisuperaman</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        zinc: {
+                            900: '#18181b',
+                            950: '#09090b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         body {
             scroll-behavior: smooth;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
     </style>
 </head>
 
-<body class="bg-white text-gray-900">
+<body class="bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 transition-colors duration-300">
     <!-- Navigation -->
-    <nav class="border-b border-gray-100 sticky top-0 bg-white z-50">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <nav
+        class="border-b border-zinc-100 dark:border-zinc-900 sticky top-0 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md z-50 transition-colors duration-300">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center">
-                    <span class="text-white font-bold text-sm">H</span>
-                </div>
-                <span class="font-semibold text-lg">hisuperaman</span>
+                <span class="font-bold text-lg tracking-tight">hisuperaman</span>
             </div>
-            <div class="flex gap-6 text-sm">
-                <a href="#projects" class="hover:text-gray-600 transition">Projects</a>
-                <a href="wallety/index.html" class="hover:text-gray-600 transition">Wallety</a>
+            <div class="flex items-center gap-6 text-sm font-medium">
+                <a href="#projects"
+                    class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition">Projects</a>
+                <a href="wallety/index.html"
+                    class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition">Wallety</a>
+
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="p-2 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 transition"
+                    aria-label="Toggle Dark Mode">
+                    <!-- Sun Icon (shows in dark mode) -->
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-zinc-400" fill="currentColor"
+                        viewBox="0 0 20 20">
+                        <path
+                            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.22 4.22a1 1 0 011.415 0l.708.708a1 1 0 01-1.414 1.414l-.708-.708a1 1 0 010-1.414zM16 10a1 1 0 011 1h1a1 1 0 110-2h-1a1 1 0 01-1 1zm-4.22 4.22a1 1 0 011.415 1.415l-.708.708a1 1 0 01-1.414-1.414l.708-.708zM10 16a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zm-4.22-4.22a1 1 0 010 1.415l-.708.708a1 1 0 01-1.414-1.414l.708-.708a1 1 0 011.415 0zM4 10a1 1 0 01-1-1H2a1 1 0 110 2h1a1 1 0 011-1zm4.22-4.22a1 1 0 010-1.415l-.708-.708a1 1 0 01-1.414 1.414l.708.708a1 1 0 011.415 0z"
+                            fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                    <!-- Moon Icon (shows in light mode) -->
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-zinc-600" fill="currentColor"
+                        viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <div class="min-h-screen bg-gradient-to-b from-white to-gray-50 flex items-center">
-        <div class="pt-8 lg:pt-0 max-w-7xl mx-auto px-6 w-full">
-            <div class="flex items-center justify-center">
-                <div class="text-center max-w-2xl">
-                    <h1 class="text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-                        hisuperaman
-                    </h1>
+    <div class="py-24 md:py-32 flex items-center">
+        <div class="max-w-5xl mx-auto px-6 w-full">
+            <div class="max-w-2xl">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
+                    Hi, I'm Aman.
+                </h1>
 
-                    <p class="text-2xl text-gray-600 mb-8 font-medium">
-                        A passionate Web Developer and Android Developer (Website design under construction).
-                    </p>
+                <p class="text-xl text-zinc-600 dark:text-zinc-400 mb-6 leading-relaxed">
+                    A Full Stack Developer & AI/ML student based in Himachal Pradesh, India.
+                </p>
 
-                    <p class="text-lg text-gray-500 mb-12 leading-relaxed">
-                        Building minimal, elegant applications that solve real problems. 
-                        Focused on privacy, user experience, and clean code.
-                    </p>
+                <p class="text-base text-zinc-500 dark:text-zinc-400 mb-10 leading-relaxed">
+                    I build minimal, high-performance applications with a focus on RAG architectures, clean UI, and
+                    system security. Currently building products and experimenting in Linux
+                    environments.
+                </p>
 
-                    <!-- CTA Button -->
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="#projects"
-                            class="bg-gray-900 text-white py-4 px-8 rounded-lg font-semibold hover:bg-gray-800 transition transform hover:scale-105 inline-block">
-                            View Projects
-                        </a>
-                        <a href="wallety"
-                            class="border-2 border-gray-900 text-gray-900 py-4 px-8 rounded-lg font-semibold hover:bg-gray-50 transition inline-block">
-                            Explore Wallety
-                        </a>
-                    </div>
+                <!-- Links -->
+                <div class="flex gap-4">
+                    <a href="#projects"
+                        class="text-sm font-medium text-zinc-900 dark:text-zinc-100 hover:underline underline-offset-4 decoration-zinc-300 dark:decoration-zinc-700">
+                        View Projects ↘
+                    </a>
+                    <a href="https://github.com/hisuperaman" target="_blank"
+                        class="text-sm font-medium text-zinc-900 dark:text-zinc-100 hover:underline underline-offset-4 decoration-zinc-300 dark:decoration-zinc-700">
+                        GitHub ↗
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Projects Section -->
-    <div id="projects" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl font-bold mb-12 text-center">Featured Projects</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Wallety Card -->
-                <div class="border border-gray-200 rounded-lg p-8 hover:shadow-lg transition">
-                    <h3 class="text-2xl font-bold mb-3">Wallety</h3>
-                    <p class="text-gray-600 mb-4">
-                        A minimal, privacy-first expense tracker for Android. Track your spending, categorize transactions, and backup to Google Drive.
+    <div id="projects" class="py-20 bg-zinc-50 dark:bg-zinc-900/50 transition-colors duration-300">
+        <div class="max-w-5xl mx-auto px-6">
+            <h2 class="text-2xl font-bold mb-10 tracking-tight">Selected Work</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Wallety -->
+                <div
+                    class="group border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 rounded-xl p-6 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors">
+                    <h3 class="text-lg font-semibold mb-2">Wallety</h3>
+                    <p class="text-sm text-zinc-600 dark:text-zinc-400 mb-6">
+                        A minimal, privacy-first expense tracker for Android. Track spending, categorize transactions,
+                        and securely backup to Google Drive.
                     </p>
-                    <a href="wallety/index.html"
-                        class="text-gray-900 font-semibold hover:text-gray-600 transition inline-flex items-center gap-2">
-                        Learn More
-                        <span>→</span>
+                    <a href="wallety/index.html" target="_blank"
+                        class="text-sm font-medium text-zinc-900 dark:text-zinc-100 group-hover:underline underline-offset-4 decoration-zinc-300 dark:decoration-zinc-700 inline-flex items-center gap-1">
+                        View Project <span>→</span>
                     </a>
                 </div>
 
-                <!-- More Projects Placeholder -->
-                <div class="border border-gray-200 rounded-lg p-8 hover:shadow-lg transition">
-                    <h3 class="text-2xl font-bold mb-3">More Coming Soon</h3>
-                    <p class="text-gray-600 mb-4">
-                        Working on new projects and features. Stay tuned for updates on innovative solutions.
+                <!-- humantype -->
+                <div
+                    class="group border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 rounded-xl p-6 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors">
+                    <h3 class="text-lg font-semibold mb-2">humantype</h3>
+                    <p class="text-sm text-zinc-600 dark:text-zinc-400 mb-6">
+                        A minimalist, real-time typing test application built with React.js, focused on clean typography
+                        and fluid user experience.
                     </p>
-                    <p class="text-gray-500 font-semibold inline-flex items-center gap-2">
-                        In Progress
-                        <span>⏳</span>
-                    </p>
+                    <a href="https://humantype.onrender.com/" target="_blank"
+                        class="text-sm font-medium text-zinc-900 dark:text-zinc-100 group-hover:underline underline-offset-4 decoration-zinc-300 dark:decoration-zinc-700 inline-flex items-center gap-1">
+                        View Project <span>→</span>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="border-t border-gray-200 bg-white py-12">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <p class="text-gray-600 mb-4">© 2026 hisuperaman. All rights reserved.</p>
+    <footer class="border-t border-zinc-200 dark:border-zinc-900 py-8 transition-colors duration-300">
+        <div
+            class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-zinc-500 dark:text-zinc-500">
+            <p>© 2026 Aman. All rights reserved.</p>
+            <p>Developed with ❤️ by <a href="https://github.com/hisuperaman" target="_blank" class="underline">hisuperaman</a></p>
         </div>
     </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        // Check system preference or localStorage
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            lightIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            darkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function () {
+            // Toggle icons
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+
+            // Toggle theme
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+    </script>
 </body>
 
 </html>

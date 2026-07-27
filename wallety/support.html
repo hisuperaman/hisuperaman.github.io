@@ -1,95 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Support - Wallety</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        zinc: {
+                            900: '#18181b',
+                            950: '#09090b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        .accordion-button {
-            width: 100%;
-            padding: 16px;
-            text-align: left;
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            margin-bottom: 8px;
-            border-radius: 8px;
-            font-weight: 500;
-            color: #212529;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        body {
+            scroll-behavior: smooth;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        .accordion-button:hover {
-            background: #e9ecef;
-        }
-
+        /* Accordion Logic Styles */
         .accordion-button.active {
-            background: #212529;
-            color: white;
+            background-color: #18181b;
+            color: #ffffff;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
         }
 
-        .accordion-content {
-            display: none;
-            padding: 16px;
-            background: white;
-            border: 1px solid #e9ecef;
-            border-top: none;
-            color: #495057;
-            line-height: 1.6;
-            margin-bottom: 12px;
-            border-radius: 0 0 8px 8px;
+        .dark .accordion-button.active {
+            background-color: #f4f4f5;
+            color: #18181b;
         }
 
-        .accordion-content.active {
-            display: block;
-        }
-
-        .accordion-icon {
+        .accordion-button .accordion-icon {
             transition: transform 0.3s ease;
-            font-size: 18px;
         }
 
         .accordion-button.active .accordion-icon {
             transform: rotate(180deg);
         }
 
-        .form-input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: inherit;
-            transition: border-color 0.3s ease;
+        .accordion-content {
+            display: none;
         }
 
-        .form-input:focus {
-            outline: none;
-            border-color: #212529;
-            box-shadow: 0 0 0 3px rgba(33, 37, 41, 0.1);
+        .accordion-content.active {
+            display: block;
         }
 
-        .form-button {
-            width: 100%;
-            padding: 12px;
-            background: #212529;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .form-button:hover {
-            background: #0a0c0d;
-        }
-
+        /* Toast Styles */
         .toast-container {
             position: fixed;
             top: 20px;
@@ -101,54 +68,36 @@
         }
 
         .toast {
-            background: white;
             padding: 16px 20px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            border-left: 4px solid #212529;
+            border-left: 4px solid #18181b;
             animation: slideIn 0.3s ease-out;
             max-width: 350px;
             word-wrap: break-word;
+            background: white;
+            color: #18181b;
         }
 
-        .toast.success {
-            border-left-color: #28a745;
-            background: #f0f9f7;
-            color: #155724;
+        .dark .toast {
+            background: #18181b;
+            color: #f4f4f5;
+            border-left: 4px solid #f4f4f5;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
 
-        .toast.error {
-            border-left-color: #dc3545;
-            background: #fef5f5;
-            color: #721c24;
-        }
-
-        .toast.info {
-            border-left-color: #17a2b8;
-            background: #f0f9fb;
-            color: #0c5460;
-        }
+        .toast.success { border-left-color: #10b981; }
+        .toast.error { border-left-color: #ef4444; }
+        .toast.info { border-left-color: #3b82f6; }
 
         @keyframes slideIn {
-            from {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
         @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(400px);
-                opacity: 0;
-            }
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(400px); opacity: 0; }
         }
 
         .toast.removing {
@@ -161,7 +110,7 @@
             height: 16px;
             border: 3px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            border-top-color: white;
+            border-top-color: currentColor;
             animation: spin 1s ease-in-out infinite;
             margin-right: 8px;
         }
@@ -169,95 +118,96 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-
-        .btn-loading {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
     </style>
 </head>
 
-<body class="bg-white text-gray-900">
+<body class="bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 transition-colors duration-300">
     <!-- Toast Container -->
     <div id="toastContainer" class="toast-container"></div>
+    
     <!-- Navigation -->
-    <nav class="border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <a href="index.html" class="flex items-center gap-2 hover:opacity-75 transition">
-                    <div class="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center">
-                        <span class="text-white font-bold text-sm">W</span>
+    <nav class="border-b border-zinc-100 dark:border-zinc-900 sticky top-0 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md z-50 transition-colors duration-300">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="flex items-center gap-3 hover:opacity-75 transition-opacity">
+                    <div class="w-8 h-8 bg-zinc-900 dark:bg-zinc-100 rounded-lg flex items-center justify-center transition-colors">
+                        <span class="text-white dark:text-zinc-900 font-bold text-sm">W</span>
                     </div>
-                    <span class="font-semibold text-lg">Wallety</span>
+                    <span class="font-semibold text-lg tracking-tight">Wallety</span>
                 </a>
             </div>
-            <a href="support.html" class="bg-gray-900 text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-800 transition">
-                Support
-            </a>
+            
+            <div class="flex items-center gap-4">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="p-2 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 transition" aria-label="Toggle Dark Mode">
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-zinc-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.22 4.22a1 1 0 011.415 0l.708.708a1 1 0 01-1.414 1.414l-.708-.708a1 1 0 010-1.414zM16 10a1 1 0 011 1h1a1 1 0 110-2h-1a1 1 0 01-1 1zm-4.22 4.22a1 1 0 011.415 1.415l-.708.708a1 1 0 01-1.414-1.414l.708-.708zM10 16a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zm-4.22-4.22a1 1 0 010 1.415l-.708.708a1 1 0 01-1.414-1.414l.708.708a1 1 0 011.415 0zM4 10a1 1 0 01-1-1H2a1 1 0 110 2h1a1 1 0 011-1zm4.22-4.22a1 1 0 010-1.415l-.708-.708a1 1 0 01-1.414 1.414l.708.708a1 1 0 011.415 0z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-zinc-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+
+                <a href="support.html" class="bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-4 py-2 rounded-lg text-sm font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">
+                    Support
+                </a>
+            </div>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <div class="bg-gradient-to-b from-white to-gray-50 min-h-screen py-16">
-        <div class="max-w-7xl mx-auto px-6">
+    <div class="min-h-[calc(100vh-73px)] py-16 transition-colors duration-300">
+        <div class="max-w-5xl mx-auto px-6">
             <!-- Header -->
             <div class="mb-12">
-                <h1 class="text-4xl font-bold mb-4">Support</h1>
-                <p class="text-gray-600 text-lg">
-                    We're here to help. Find answers to common questions or get in touch with us.
+                <h1 class="text-4xl font-bold mb-4 tracking-tight">Support</h1>
+                <p class="text-zinc-600 dark:text-zinc-400 text-lg leading-relaxed">
+                    We're here to help. Find answers to common questions or get in touch.
                 </p>
             </div>
 
             <!-- Content Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <!-- Left - Feedback Form -->
                 <div class="lg:col-span-2">
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-8">
-                        <h2 class="text-2xl font-bold mb-6">Send us Your Feedback</h2>
+                    <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-8 transition-colors">
+                        <h2 class="text-2xl font-bold mb-6 tracking-tight">Send Feedback</h2>
 
                         <form id="feedbackForm" action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
                             <input type="hidden" name="access_key" value="f09237c0-fb6f-4310-b7b7-1ebe6c860f85">
+                            
                             <!-- Name Field -->
                             <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Name
-                                </label>
+                                <label for="name" class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Name</label>
                                 <input type="text" id="name" name="name" placeholder="Your name" required
-                                    class="form-input">
+                                    class="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 text-zinc-900 dark:text-zinc-100 transition-shadow">
                             </div>
 
                             <!-- Email Field -->
                             <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Email
-                                </label>
+                                <label for="email" class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Email</label>
                                 <input type="email" id="email" name="email" placeholder="your@email.com" required
-                                    class="form-input">
+                                    class="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 text-zinc-900 dark:text-zinc-100 transition-shadow">
                             </div>
 
                             <!-- Message Field -->
                             <div>
-                                <label for="message" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Message
-                                </label>
+                                <label for="message" class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Message</label>
                                 <textarea id="message" name="message" placeholder="Tell us what you think..."
-                                    rows="6" required class="form-input resize-none"></textarea>
+                                    rows="5" required class="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 text-zinc-900 dark:text-zinc-100 transition-shadow resize-none"></textarea>
                             </div>
 
                             <!-- Submit Button -->
-                            <button type="submit" class="form-button">
-                                Send Feedback
+                            <button type="submit" class="w-full bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 py-3.5 px-6 rounded-xl font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors flex items-center justify-center">
+                                Send Message
                             </button>
                         </form>
 
                         <!-- Direct Email -->
-                        <div class="mt-8 pt-8 border-t border-gray-200">
-                            <p class="text-sm text-gray-600 mb-3">
-                                Or email us directly at:
-                            </p>
-                            <a href="mailto:hisuperaman@gmail.com" class="text-gray-900 font-semibold hover:text-gray-600 transition break-all">
-                                hisuperaman@gmail.com
+                        <div class="mt-8 pt-8 border-t border-zinc-200 dark:border-zinc-800">
+                            <p class="text-sm text-zinc-500 dark:text-zinc-400 mb-2">Or email directly at:</p>
+                            <a href="mailto:hisuperamanx@gmail.com" class="text-zinc-900 dark:text-zinc-100 font-medium hover:underline underline-offset-4 break-all">
+                                hisuperamanx@gmail.com
                             </a>
                         </div>
                     </div>
@@ -265,52 +215,50 @@
 
                 <!-- Right - FAQ Accordion -->
                 <div class="lg:col-span-1">
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-8">
-                        <h2 class="text-2xl font-bold mb-6">FAQ</h2>
+                    <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-8 transition-colors">
+                        <h2 class="text-2xl font-bold mb-6 tracking-tight">FAQ</h2>
 
-                        <div class="space-y-2">
+                        <div class="space-y-3">
                             <!-- FAQ Item 1 -->
                             <div>
-                                <button class="accordion-button" data-accordion="0">
-                                    <span>How do I add a transaction?</span>
-                                    <span class="accordion-icon">▼</span>
+                                <button class="accordion-button w-full p-4 text-left bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl font-medium text-zinc-900 dark:text-zinc-100 flex justify-between items-center transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800" data-accordion="0">
+                                    <span class="text-sm">How do I add a transaction?</span>
+                                    <span class="accordion-icon text-xs">▼</span>
                                 </button>
-                                <div class="accordion-content" data-accordion="0">
+                                <div class="accordion-content p-4 bg-white dark:bg-zinc-900 border border-t-0 border-zinc-200 dark:border-zinc-800 rounded-b-xl text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed" data-accordion="0">
                                     Use the on-screen numpad, select type, category, date, and comment, then tap 'check' button.
                                 </div>
                             </div>
 
                             <!-- FAQ Item 2 -->
                             <div>
-                                <button class="accordion-button" data-accordion="1">
-                                    <span>How do I edit or delete a transaction?</span>
-                                    <span class="accordion-icon">▼</span>
+                                <button class="accordion-button w-full p-4 text-left bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl font-medium text-zinc-900 dark:text-zinc-100 flex justify-between items-center transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800" data-accordion="1">
+                                    <span class="text-sm">How do I edit or delete?</span>
+                                    <span class="accordion-icon text-xs">▼</span>
                                 </button>
-                                <div class="accordion-content" data-accordion="1">
-                                    To edit, tap on a transaction to open the edit screen. Make your changes and tap the 'check' button to save.
-                                    <br>
-                                    To delete, tap and hold the backspace button in numpad until the icon changes to a trash can, then release it.
+                                <div class="accordion-content p-4 bg-white dark:bg-zinc-900 border border-t-0 border-zinc-200 dark:border-zinc-800 rounded-b-xl text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed" data-accordion="1">
+                                    To edit, tap on a transaction to open the edit screen. To delete, tap and hold the backspace button in numpad until the icon changes to a trash can, then release.
                                 </div>
                             </div>
 
                             <!-- FAQ Item 3 -->
                             <div>
-                                <button class="accordion-button" data-accordion="2">
-                                    <span>How do I back up my data?</span>
-                                    <span class="accordion-icon">▼</span>
+                                <button class="accordion-button w-full p-4 text-left bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl font-medium text-zinc-900 dark:text-zinc-100 flex justify-between items-center transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800" data-accordion="2">
+                                    <span class="text-sm">How do I back up my data?</span>
+                                    <span class="accordion-icon text-xs">▼</span>
                                 </button>
-                                <div class="accordion-content" data-accordion="2">
+                                <div class="accordion-content p-4 bg-white dark:bg-zinc-900 border border-t-0 border-zinc-200 dark:border-zinc-800 rounded-b-xl text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed" data-accordion="2">
                                     After signing in with Google, go to Backup & Restore settings screen and tap "Backup". You can also enable automatic backups.
                                 </div>
                             </div>
 
                             <!-- FAQ Item 4 -->
                             <div>
-                                <button class="accordion-button" data-accordion="3">
-                                    <span>How do I restore a backup?</span>
-                                    <span class="accordion-icon">▼</span>
+                                <button class="accordion-button w-full p-4 text-left bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl font-medium text-zinc-900 dark:text-zinc-100 flex justify-between items-center transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800" data-accordion="3">
+                                    <span class="text-sm">How do I restore a backup?</span>
+                                    <span class="accordion-icon text-xs">▼</span>
                                 </button>
-                                <div class="accordion-content" data-accordion="3">
+                                <div class="accordion-content p-4 bg-white dark:bg-zinc-900 border border-t-0 border-zinc-200 dark:border-zinc-800 rounded-b-xl text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed" data-accordion="3">
                                     After signing in with the same Google account, go to Backup & Restore settings screen and tap "Restore".
                                 </div>
                             </div>
@@ -322,21 +270,44 @@
     </div>
 
     <!-- Footer -->
-    <footer class="border-t border-gray-200 bg-white py-8">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="flex justify-center gap-8 text-sm text-gray-500">
-                <a href="privacy-policy.html" class="hover:text-gray-700 transition">Privacy</a>
-                <a href="terms-and-conditions.html" class="hover:text-gray-700 transition">Terms</a>
-                <a href="support.html" class="hover:text-gray-700 transition">Support</a>
+    <footer class="border-t border-zinc-200 dark:border-zinc-900 py-8 transition-colors duration-300 bg-white dark:bg-zinc-950">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-zinc-500">
+            <div class="flex gap-6">
+                <a href="privacy-policy.html" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Privacy</a>
+                <a href="terms-and-conditions.html" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Terms</a>
+                <a href="support.html" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Support</a>
             </div>
-            <div class="flex justify-between mt-4 sm:mt-0">
-                <p class="text-gray-600 text-xs">© All rights reserved.</p>
-                <p class="text-xs">Developed with ❤️ by <a href='https://github.com/hisuperaman' target="_blank" class="text-gray-700 hover:text-gray-900">hisuperaman</a></p>
-            </div>
+            <p>Developed with ❤️ by <a href='https://github.com/hisuperaman' target="_blank" class="text-zinc-900 dark:text-zinc-100 font-medium hover:underline underline-offset-4">hisuperaman</a></p>
         </div>
     </footer>
 
     <script>
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            lightIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            darkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function () {
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+
         // Toast notification function
         function showToast(message, type = 'info', duration = 4000) {
             const toastContainer = document.getElementById('toastContainer');
@@ -388,11 +359,9 @@
         feedbackForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // Disable button and show loading state
             submitButton.disabled = true;
-            submitButton.classList.add('btn-loading');
             const originalText = submitButton.textContent;
-            submitButton.innerHTML = '<span class="loader"></span>' + originalText;
+            submitButton.innerHTML = '<span class="loader"></span> Sending...';
             
             const formData = new FormData(feedbackForm);
             
@@ -405,22 +374,17 @@
                 if (data.success) {
                     showToast('Thank you for your feedback! We\'ll get back to you soon.', 'success');
                     feedbackForm.reset();
-                    submitButton.disabled = false;
-                    submitButton.classList.remove('btn-loading');
-                    submitButton.textContent = originalText;
                 } else {
                     console.error('Form submission error:', data);
                     showToast('There was an error submitting your feedback. Please try again.', 'error');
-                    submitButton.disabled = false;
-                    submitButton.classList.remove('btn-loading');
-                    submitButton.textContent = originalText;
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
                 showToast('There was an error submitting your feedback. Please try again.', 'error');
+            })
+            .finally(() => {
                 submitButton.disabled = false;
-                submitButton.classList.remove('btn-loading');
                 submitButton.textContent = originalText;
             });
         });

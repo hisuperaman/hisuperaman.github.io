@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -13,7 +13,27 @@
     <meta property="og:type" content="website">
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        zinc: {
+                            900: '#18181b',
+                            950: '#09090b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
+        body {
+            scroll-behavior: smooth;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
         .phone-frame {
             width: 280px;
             height: 570px;
@@ -36,420 +56,129 @@
             border-radius: 0 0 20px 20px;
             z-index: 10;
         }
-
-        .screen-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .screen-icon {
-            width: 60px;
-            height: 60px;
-            background: #212529;
-            border-radius: 15px;
-            margin: 0 auto 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 30px;
-            font-weight: bold;
-        }
-
-        .screen-text {
-            color: #212529;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        .screen-chart {
-            width: 100%;
-            height: 60px;
-            background: #fff;
-            border-radius: 10px;
-            margin-top: 20px;
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-around;
-            padding: 10px 5px;
-            gap: 3px;
-        }
-
-        .bar {
-            flex: 1;
-            background: #212529;
-            border-radius: 3px;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 50;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 12px;
-            padding: 32px;
-            max-width: 450px;
-            width: 90%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        .modal-close {
-            cursor: pointer;
-        }
-
-        .loader {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 8px;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .btn-loading {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .toast-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .toast {
-            background: white;
-            padding: 16px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            border-left: 4px solid #212529;
-            animation: slideIn 0.3s ease-out;
-            max-width: 350px;
-            word-wrap: break-word;
-        }
-
-        .toast.success {
-            border-left-color: #28a745;
-            background: #f0f9f7;
-            color: #155724;
-        }
-
-        .toast.error {
-            border-left-color: #dc3545;
-            background: #fef5f5;
-            color: #721c24;
-        }
-
-        .toast.info {
-            border-left-color: #17a2b8;
-            background: #f0f9fb;
-            color: #0c5460;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-
-            to {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-        }
-
-        .toast.removing {
-            animation: slideOut 0.3s ease-out forwards;
-        }
     </style>
 </head>
 
-<body class="bg-white text-gray-900">
-    <!-- Toast Container -->
-    <div id="toastContainer" class="toast-container"></div>
+<body class="bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 transition-colors duration-300">
     <!-- Navigation -->
-    <nav class="border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center">
-                    <span class="text-white font-bold text-sm">W</span>
+    <nav class="border-b border-zinc-100 dark:border-zinc-900 sticky top-0 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md z-50 transition-colors duration-300">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-zinc-900 dark:bg-zinc-100 rounded-lg flex items-center justify-center transition-colors">
+                    <span class="text-white dark:text-zinc-900 font-bold text-sm">W</span>
                 </div>
-                <span class="font-semibold text-lg">Wallety</span>
+                <span class="font-semibold text-lg tracking-tight">Wallety</span>
             </div>
-            <a href="support.html"
-                class="bg-gray-900 text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-800 transition">
-                Support
-            </a>
+            
+            <div class="flex items-center gap-4">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="p-2 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 transition" aria-label="Toggle Dark Mode">
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-zinc-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.22 4.22a1 1 0 011.415 0l.708.708a1 1 0 01-1.414 1.414l-.708-.708a1 1 0 010-1.414zM16 10a1 1 0 011 1h1a1 1 0 110-2h-1a1 1 0 01-1 1zm-4.22 4.22a1 1 0 011.415 1.415l-.708.708a1 1 0 01-1.414-1.414l.708-.708zM10 16a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zm-4.22-4.22a1 1 0 010 1.415l-.708.708a1 1 0 01-1.414-1.414l.708.708a1 1 0 011.415 0zM4 10a1 1 0 01-1-1H2a1 1 0 110 2h1a1 1 0 011-1zm4.22-4.22a1 1 0 010-1.415l-.708-.708a1 1 0 01-1.414 1.414l.708.708a1 1 0 011.415 0z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-zinc-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+
+                <a href="support.html" class="bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-4 py-2 rounded-lg text-sm font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">
+                    Support
+                </a>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <div class="min-h-screen bg-gradient-to-b from-white to-gray-50 flex items-center pb-8">
-        <div class="pt-8 lg:pt-0 max-w-7xl mx-auto px-6 w-full">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <div class="min-h-[calc(100vh-73px)] flex items-center py-12">
+        <div class="max-w-5xl mx-auto px-6 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <!-- Left Content -->
                 <div>
-                    <h1 class="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                    <!-- Closed Beta Testing Badge -->
+                    <div class="inline-block border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 px-3 py-1.5 rounded-full mb-6">
+                        <p class="text-xs text-zinc-600 dark:text-zinc-400 font-semibold uppercase tracking-wider">Live Now</p>
+                    </div>
+
+                    <h1 class="text-4xl lg:text-5xl font-bold mb-6 tracking-tight leading-tight">
                         Take Control of Your Finances with Wallety
                     </h1>
 
-                    <p class="text-xl text-gray-600 mb-8">
-                        Wallety is a minimal, privacy-first expense tracker that lets you deposit and withdraw money,
-                        categorize transactions, and visualize your spending—all locally or backed up to your Google
-                        Drive.
+                    <p class="text-lg text-zinc-600 dark:text-zinc-400 mb-8 leading-relaxed">
+                        Wallety is a minimal, privacy-first expense tracker that lets you deposit and withdraw money, categorize transactions, and visualize your spending—all locally or backed up to your Google Drive.
                     </p>
-
-                    <!-- Closed Beta Testing Badge -->
-                    <div class="inline-block bg-gray-100 px-4 py-2 rounded-lg mb-8">
-                        <p class="text-sm text-gray-700 font-medium">🔒 Closed Beta Testing</p>
-                    </div>
 
                     <!-- Download Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 mb-12">
-                        <button id="downloadAndroidBtn"
-                            class="bg-gray-900 text-white py-4 px-8 rounded-lg font-semibold hover:bg-gray-800 transition transform hover:scale-105">
+                        <a href="https://play.google.com/store/apps/details?id=com.hisuperaman.wallety" target="_blank"
+                            class="bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 py-3.5 px-6 rounded-xl font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors inline-flex justify-center items-center gap-2">
                             Download for Android
-                        </button>
-                        <div class="flex items-center justify-center">
-                            <a href="https://drive.google.com/file/d/1geYQAaGYGKs0rfFBpZ2agWDNlOOd6PV_/view?usp=sharing" target="_blank" class="text-gray-600 hover:text-gray-900 transition font-medium inline-flex items-center gap-2">
-                                <span>Demo Video</span>
-                                <span>→</span>
-                            </a>
-                        </div>
+                        </a>
+                        <a href="https://drive.google.com/file/d/1geYQAaGYGKs0rfFBpZ2agWDNlOOd6PV_/view?usp=sharing" target="_blank" class="border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 py-3.5 px-6 rounded-xl font-medium hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors inline-flex justify-center items-center gap-2">
+                            Demo Video ↗
+                        </a>
                     </div>
 
                     <!-- Social Proof -->
-                    <div class="mt-16 pt-8 border-t border-gray-200">
-                        <p class="text-sm text-gray-500 mb-4">Available on Android</p>
-                        <div class="flex gap-8">
-                            <div>
-                                <p class="text-2xl font-bold">4.9★</p>
-                                <p class="text-sm text-gray-600">1+ reviews</p>
-                            </div>
-                            <div>
-                                <p class="text-2xl font-bold">1+</p>
-                                <p class="text-sm text-gray-600">Active users</p>
-                            </div>
+                    <div class="pt-8 border-t border-zinc-200 dark:border-zinc-800 flex gap-12">
+                        <div>
+                            <p class="text-2xl font-bold tracking-tight">4.9★</p>
+                            <p class="text-sm text-zinc-500 mt-1">1+ reviews</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold tracking-tight">1+</p>
+                            <p class="text-sm text-zinc-500 mt-1">Active users</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Right - Phone Mockup -->
                 <div class="flex justify-center lg:justify-end">
-                    <div class="phone-frame overflow-hidden">
-                        <img src="./images/app-screen.jpg" alt="app screenshot" class="object-fill">
+                    <div class="phone-frame overflow-hidden bg-zinc-950 border-4 border-zinc-800 dark:border-zinc-700">
+                        <img src="./images/app-screen.jpg" alt="Wallety App Screenshot" class="object-cover w-full h-full rounded-[24px]">
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Download Modal -->
-    <div id="downloadModal" class="modal">
-        <div class="modal-content">
-            <!-- Close Button -->
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold">Download Wallety</h2>
-                <button id="closeModalBtn" class="modal-close text-2xl text-gray-500 hover:text-gray-700">
-                    ✕
-                </button>
-            </div>
-
-            <!-- Description -->
-            <p class="text-gray-600 mb-6 leading-relaxed">
-                Wallety is currently in <span class="font-semibold">closed beta testing</span>. If you want to back up
-                your app data to your Google account, please provide your email address. This helps me (the developer)
-                grant you access to the backup feature.
-            </p>
-
-            <form id="downloadForm" action="https://api.web3forms.com/submit" method="POST">
-                <input type="hidden" name="access_key" value="6e3d9365-f339-47c7-873d-100197033b9b">
-                <div class="mb-6">
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                    <input type="email" id="email" name="email" placeholder="john@doe.com"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
-                        required>
-                </div>
-
-                <!-- Submit Button -->
-                <button id="submitBtn" type="submit"
-                    class="w-full bg-gray-900 text-white py-3 px-4 rounded-lg font-semibold hover:bg-gray-800 transition mb-4">
-                    Submit Email and Download
-                </button>
-            </form>
-
-            <!-- Download Anyway Link -->
-            <div class="text-center">
-                <button id="downloadAnywayBtn"
-                    class="text-gray-600 hover:text-gray-900 transition font-medium inline-flex items-center gap-2">
-                    <span>Download Anyway</span>
-                    <span>→</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
     <!-- Footer -->
-    <footer class="border-t border-gray-200 bg-white py-8">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="flex justify-center gap-8 text-sm text-gray-500">
-                <a href="privacy-policy.html" class="hover:text-gray-700 transition">Privacy</a>
-                <a href="terms-and-conditions.html" class="hover:text-gray-700 transition">Terms</a>
-                <a href="support.html" class="hover:text-gray-700 transition">Support</a>
+    <footer class="border-t border-zinc-200 dark:border-zinc-900 py-8 transition-colors duration-300 bg-white dark:bg-zinc-950">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-zinc-500">
+            <div class="flex gap-6">
+                <a href="privacy-policy.html" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Privacy</a>
+                <a href="terms-and-conditions.html" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Terms</a>
+                <a href="support.html" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Support</a>
             </div>
-            <div class="flex justify-between mt-4 sm:mt-0">
-                <p class="text-gray-600 text-xs">© All rights reserved.</p>
-                <p class="text-xs">Developed with ❤️ by <a href='https://github.com/hisuperaman' target="_blank"
-                        class="text-gray-700 hover:text-gray-900">hisuperaman</a></p>
-            </div>
+            <p>Developed with ❤️ by <a href='https://github.com/hisuperaman' target="_blank" class="text-zinc-900 dark:text-zinc-100 font-medium hover:underline underline-offset-4">hisuperaman</a></p>
         </div>
     </footer>
 
     <script>
-        // Toast notification function
-        function showToast(message, type = 'info', duration = 4000) {
-            const toastContainer = document.getElementById('toastContainer');
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.textContent = message;
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
 
-            toastContainer.appendChild(toast);
-
-            setTimeout(() => {
-                toast.classList.add('removing');
-                setTimeout(() => {
-                    toast.remove();
-                }, 300);
-            }, duration);
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            lightIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            darkIcon.classList.remove('hidden');
         }
 
-        const downloadAndroidBtn = document.getElementById('downloadAndroidBtn');
-        const downloadModal = document.getElementById('downloadModal');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const downloadForm = document.getElementById('downloadForm');
-        const downloadAnywayBtn = document.getElementById('downloadAnywayBtn');
-        const emailInput = document.getElementById('email');
-        const submitBtn = document.getElementById('submitBtn');
+        themeToggleBtn.addEventListener('click', function () {
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
 
-        // Open modal
-        downloadAndroidBtn.addEventListener('click', () => {
-            downloadModal.classList.add('active');
-        });
-
-        // Close modal
-        function closeModal() {
-            downloadModal.classList.remove('active');
-            emailInput.value = '';
-        }
-
-        closeModalBtn.addEventListener('click', closeModal);
-
-        // Close modal when clicking outside
-        downloadModal.addEventListener('click', (e) => {
-            if (e.target === downloadModal) {
-                closeModal();
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
             }
         });
-
-        // Handle form submission
-        downloadForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            // Disable button and show loader
-            submitBtn.disabled = true;
-            submitBtn.classList.add('btn-loading');
-            const originalText = submitBtn.textContent;
-            submitBtn.innerHTML = '<span class="loader"></span>Submitting...';
-
-            // Submit to web3forms
-            const formData = new FormData(downloadForm);
-
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        triggerDownload();
-                        closeModal();
-                        // Reset button
-                        submitBtn.disabled = false;
-                        submitBtn.classList.remove('btn-loading');
-                        submitBtn.textContent = originalText;
-                    } else {
-                        console.error('Form submission error:', data);
-                        // Reset button and show error
-                        submitBtn.disabled = false;
-                        submitBtn.classList.remove('btn-loading');
-                        submitBtn.textContent = originalText;
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    // Reset button and show error
-                    submitBtn.disabled = false;
-                    submitBtn.classList.remove('btn-loading');
-                    submitBtn.textContent = originalText;
-                });
-        });
-
-        // Download anyway
-        downloadAnywayBtn.addEventListener('click', () => {
-            triggerDownload();
-            closeModal();
-        });
-
-        // Trigger download
-        function triggerDownload() {
-            const link = document.createElement('a');
-            link.href = './releases/wallety-1.0.apk';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            showToast('Your download has begun. Thank you for installing!', 'success');
-        }
     </script>
 </body>
 
