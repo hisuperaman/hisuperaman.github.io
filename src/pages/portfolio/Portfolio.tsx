@@ -115,13 +115,12 @@ export const Portfolio = () =>
 
             {portfolio.socials.map((social) => {
                 const Icon = social.icon;
-                const isEmail = social.href.startsWith('mailto:');
                 return (
                     <DockItem
                         key={social.label}
                         icon={Icon}
                         href={social.href}
-                        external={!isEmail}
+                        external
                         label={`${social.label}: ${social.handle}`}
                     />
                 );
