@@ -7,11 +7,11 @@ import {defineConfig} from 'vite';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
+    base: '/',
     plugins: [react(), tailwindcss()],
     resolve: {
         alias: {'@': path.resolve(__dirname, 'src')},
         dedupe: ['react', 'react-dom'],
     },
     build: {outDir: 'dist'},
-    base: '',
 });
