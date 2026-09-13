@@ -1,18 +1,13 @@
 import {Portfolio} from "@/definitions";
-import {FaGithub, FaLinkedin, FaXTwitter, FaAws} from "react-icons/fa6";
-import {Mail, Smartphone, Code, Database, Server, Cpu, Terminal} from "lucide-react";
+import {FaGithub, FaLinkedin} from "react-icons/fa6";
+import {Mail, Smartphone, Cpu} from "lucide-react";
 import {
-    SiDocker,
-    SiGit,
-    SiJavascript,
     SiNodedotjs,
     SiPostgresql,
     SiReact,
     SiTypescript,
     SiPython,
-    SiMongodb,
     SiDjango,
-    SiExpress,
     SiTailwindcss,
     SiFastapi,
     SiRedis,
@@ -147,7 +142,7 @@ export const portfolio: Portfolio = {
             date: '2023',
             tags: ['Android', 'Jetpack Compose', 'Kotlin'],
             source: 'https://github.com/hisuperaman/wallety',
-            website: 'https://hisuperaman.me/wallety',
+            website: `${window.location.origin}/wallety`,
             image: '/images/projects/wallety.png',
         },
     ],

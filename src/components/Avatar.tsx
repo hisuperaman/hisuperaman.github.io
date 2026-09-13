@@ -1,5 +1,5 @@
 import {ImgHTMLAttributes} from "react";
-import {getInitial} from "@/utils";
+import {getInitial} from "@/utils/string";
 
 interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
     src?: string;

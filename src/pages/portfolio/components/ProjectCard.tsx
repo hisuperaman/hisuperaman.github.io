@@ -1,9 +1,9 @@
 import {Globe} from "lucide-react";
 import {FaGithub} from "react-icons/fa6";
 import {Project} from "@/definitions";
-import {HoverArrow} from "@/components/HoverArrow";
-import {getInitial} from "@/utils";
+import {getInitial} from "@/utils/string";
 import {ElementType} from "react";
+import {HoverArrow} from "@/components";
 
 
 interface ProjectLinkProps {

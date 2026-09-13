@@ -1,6 +1,5 @@
 import {Education} from "@/definitions";
-import {Avatar} from "@/components/Avatar";
-import {HoverArrow} from "@/components/HoverArrow";
+import {Avatar, HoverArrow} from "@/components";
 
 export const EducationRow = ({education}: { education: Education }) =>
     <a

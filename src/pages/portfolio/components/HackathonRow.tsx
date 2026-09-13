@@ -1,6 +1,5 @@
 import {Hackathon} from "@/definitions";
-import {Avatar} from "@/components/Avatar";
-import {HoverArrow} from "@/components/HoverArrow";
+import {Avatar, HoverArrow} from "@/components";
 
 export const HackathonRow = ({hackathon}: { hackathon: Hackathon }) =>
     <div className="flex flex-col justify-between gap-4 py-5 sm:flex-row sm:items-start">
