@@ -21,7 +21,7 @@ export const portfolio: Portfolio = {
         location: 'Mandi, Himachal Pradesh, India',
         availability: 'Software Engineer - Agentic AI & Full Stack Development',
         intro: 'I build intelligent, high-quality web applications focusing on LLMs, Generative AI, and Machine Learning.',
-        image: '/images/avatar.jpg',
+        image: '/images/avatar.jpeg',
     },
     about: [
         'I am a Software Engineer working at the intersection of AI and full-stack development, passionate about bridging the gap between intelligent models and user-facing applications. My favorite projects sit somewhere between a complex RAG architecture and a clean, unbloated user interface.',
