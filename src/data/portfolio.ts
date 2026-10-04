@@ -51,7 +51,7 @@ export const portfolio: Portfolio = {
         },
         {
             company: 'Guru Kripa Institution',
-            role: 'Industrial Trainee & Developer',
+            role: 'Industrial Training Mentor',
             date: 'Aug 2023 - Aug 2025',
             location: 'Sundernagar, India',
             summary: 'Mentored B.Tech, BCA, MCA and Polytechnic students in industrial training projects, helping them build web and desktop applications using Django, Spring Boot, PHP, Java Swing and Python Tkinter.',
