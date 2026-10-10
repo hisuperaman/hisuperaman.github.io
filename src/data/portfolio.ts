@@ -1,6 +1,6 @@
-import {Portfolio} from "@/definitions";
-import {FaGithub, FaLinkedin} from "react-icons/fa6";
-import {Mail, Smartphone, Cpu} from "lucide-react";
+import { Portfolio } from "@/definitions";
+import { FaGithub, FaLinkedin } from "react-icons/fa6";
+import { Mail, Smartphone, Cpu } from "lucide-react";
 import {
     SiNodedotjs,
     SiPostgresql,
@@ -83,18 +83,18 @@ export const portfolio: Portfolio = {
         },
     ],
     skills: [
-        {name: 'React & React Native', icon: SiReact},
-        {name: 'TypeScript', icon: SiTypescript},
-        {name: 'Django', icon: SiDjango},
-        {name: 'FastAPI', icon: SiFastapi},
-        {name: 'Node.js & Express', icon: SiNodedotjs},
-        {name: 'Python', icon: SiPython},
-        {name: 'PostgreSQL', icon: SiPostgresql},
-        {name: 'Redis', icon: SiRedis},
-        {name: 'Tailwind CSS', icon: SiTailwindcss},
-        {name: 'Jetpack Compose', icon: Smartphone},
-        {name: 'LangChain & LLMs', icon: Cpu},
-        {name: 'Firebase', icon: SiFirebase},
+        { name: 'React & React Native', icon: SiReact },
+        { name: 'TypeScript', icon: SiTypescript },
+        { name: 'Django', icon: SiDjango },
+        { name: 'FastAPI', icon: SiFastapi },
+        { name: 'Node.js & Express', icon: SiNodedotjs },
+        { name: 'Python', icon: SiPython },
+        { name: 'PostgreSQL', icon: SiPostgresql },
+        { name: 'Redis', icon: SiRedis },
+        { name: 'Tailwind CSS', icon: SiTailwindcss },
+        { name: 'Jetpack Compose', icon: Smartphone },
+        { name: 'LangChain & LLMs', icon: Cpu },
+        { name: 'Firebase', icon: SiFirebase },
     ],
     projects: [
         {
@@ -145,6 +145,15 @@ export const portfolio: Portfolio = {
             website: `${window.location.origin}/wallety`,
             image: '/images/projects/wallety.png',
         },
+        {
+            name: 'ClockMate',
+            description: 'A simple, distraction-free chess clock mobile app for over-the-board play.',
+            date: '2026',
+            tags: ['React Native', 'Expo', 'TypeScript'],
+            source: 'https://github.com/hisuperaman/clockmate',
+            website: `${window.location.origin}/clockmate`,
+            image: '/images/clockmate/icon.svg',
+        },
     ],
     hackathons: [
         {
@@ -157,9 +166,9 @@ export const portfolio: Portfolio = {
         },
     ],
     socials: [
-        {label: 'GitHub', href: 'https://github.com/hisuperaman', handle: '@hisuperaman', icon: FaGithub},
-        {label: 'LinkedIn', href: 'https://linkedin.com/in/hisuperaman', handle: '/in/hisuperaman', icon: FaLinkedin},
-        {label: 'Email', href: 'mailto:hisuperamanx@gmail.com', handle: 'hisuperamanx@gmail.com', icon: Mail},
+        { label: 'GitHub', href: 'https://github.com/hisuperaman', handle: '@hisuperaman', icon: FaGithub },
+        { label: 'LinkedIn', href: 'https://linkedin.com/in/hisuperaman', handle: '/in/hisuperaman', icon: FaLinkedin },
+        { label: 'Email', href: 'mailto:hisuperamanx@gmail.com', handle: 'hisuperamanx@gmail.com', icon: Mail },
     ],
     contact: {
         body: 'Want to trade notes on LLMs, minimalist UI systems, or the strange little details that make software feel human? Just send a note — I read everything.',

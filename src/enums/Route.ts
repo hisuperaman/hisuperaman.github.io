@@ -1,6 +1,7 @@
 export const RoutePaths = {
     empty: "",
     wallety: "wallety",
+    clockmate: "clockmate",
     privacyPolicy: "privacy-policy",
     terms: "terms",
     support: "support",

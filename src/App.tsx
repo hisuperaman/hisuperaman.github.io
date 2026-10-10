@@ -1,7 +1,18 @@
-import {NotFound, Portfolio, WalletyOverview, WalletyPrivacy, WalletySupport, WalletyTerms} from "@/pages";
-import {Route, Switch} from "wouter";
-import {RoutePaths} from "@/enums";
-import {Path} from "@/utils";
+import {
+    ClockMateOverview,
+    ClockMatePrivacy,
+    ClockMateSupport,
+    ClockMateTerms,
+    NotFound,
+    Portfolio,
+    WalletyOverview,
+    WalletyPrivacy,
+    WalletySupport,
+    WalletyTerms,
+} from "@/pages";
+import { Route, Switch } from "wouter";
+import { RoutePaths } from "@/enums";
+import { Path } from "@/utils";
 
 function App() {
     return (
@@ -29,7 +40,25 @@ function App() {
                 component={WalletySupport}
             />
 
-            <Route component={NotFound}/>
+            {/* ClockMate */}
+            <Route
+                path={Path.getExactRoutePath(RoutePaths.clockmate)}
+                component={ClockMateOverview}
+            />
+            <Route
+                path={Path.getExactRoutePath(RoutePaths.clockmate, RoutePaths.privacyPolicy)}
+                component={ClockMatePrivacy}
+            />
+            <Route
+                path={Path.getExactRoutePath(RoutePaths.clockmate, RoutePaths.terms)}
+                component={ClockMateTerms}
+            />
+            <Route
+                path={Path.getExactRoutePath(RoutePaths.clockmate, RoutePaths.support)}
+                component={ClockMateSupport}
+            />
+
+            <Route component={NotFound} />
         </Switch>
     );
 }
