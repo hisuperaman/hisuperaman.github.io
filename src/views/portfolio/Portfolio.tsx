@@ -1,3 +1,5 @@
+"use client";
+
 import {portfolio} from '@/data/portfolio';
 import {Home} from "lucide-react";
 import {Avatar, DockItem, HoverArrow, Navigation} from "@/components";
@@ -8,7 +10,7 @@ import {
     ProjectCard,
     SkillBadge,
     WorkRow
-} from "@/pages/portfolio/components";
+} from "@/views/portfolio/components";
 
 
 export const Portfolio = () =>

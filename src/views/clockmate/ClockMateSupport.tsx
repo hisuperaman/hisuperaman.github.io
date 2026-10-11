@@ -1,3 +1,5 @@
+"use client";
+
 import { SubmitEvent, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { ClockMateLayout } from "@/layouts";

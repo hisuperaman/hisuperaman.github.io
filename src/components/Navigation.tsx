@@ -1,7 +1,10 @@
+"use client";
+
 import {ReactNode, ElementType} from 'react';
 import {Sun, Moon} from 'lucide-react';
 import {useTheme} from "@/hooks";
-import {Link, useLocation} from "wouter";
+import Link from "next/link";
+import {usePathname} from "next/navigation";
 import {isRouteActive} from "@/utils/url";
 
 type DockItemBase = {
@@ -30,7 +33,7 @@ export const DockItem = ({
                              className = '',
                              ...props
                          }: DockItemProps) => {
-    const [pathname] = useLocation();
+    const pathname = usePathname().replace(/(.)\/$/, "$1");
 
     const baseClasses = `focus-ring flex h-12 w-12 items-center justify-center rounded-full text-muted-foreground transition-all hover:bg-secondary hover:text-foreground hover:-translate-y-1 cursor-pointer ${className}`.trim();
 

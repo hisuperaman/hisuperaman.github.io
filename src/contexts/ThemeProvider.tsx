@@ -1,4 +1,6 @@
-import {type ReactNode, useEffect, useState} from "react";
+"use client";
+
+import {type ReactNode, useEffect, useLayoutEffect, useState} from "react";
 import {ThemeProviderContext} from "@/contexts/ThemeContext";
 import type {Theme} from "@/definitions";
 
@@ -14,11 +16,18 @@ export const ThemeProvider = ({
                                   storageKey,
                                   ...props
                               }: ThemeProviderProps) => {
-    const [theme, setTheme] = useState<Theme>(
-        () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-    )
+    const [theme, setTheme] = useState<Theme>(defaultTheme)
+    const [loaded, setLoaded] = useState(false)
+
+    // localStorage is only available in the browser, so read the saved theme after hydration
+    useLayoutEffect(() => {
+        setTheme((localStorage.getItem(storageKey) as Theme) || defaultTheme)
+        setLoaded(true)
+    }, [storageKey, defaultTheme])
 
     useEffect(() => {
+        if (!loaded) return
+
         const root = window.document.documentElement
 
         root.classList.remove("light", "dark")
@@ -34,7 +43,7 @@ export const ThemeProvider = ({
         }
 
         root.classList.add(theme)
-    }, [theme])
+    }, [theme, loaded])
 
     return (
         <ThemeProviderContext.Provider {...props} value={{

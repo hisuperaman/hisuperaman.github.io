@@ -1,4 +1,4 @@
-import {Link} from "wouter";
+import Link from "next/link";
 import {Home} from "lucide-react";
 
 export const NotFound = () =>

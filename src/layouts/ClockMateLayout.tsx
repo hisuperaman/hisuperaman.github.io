@@ -1,3 +1,5 @@
+"use client";
+
 import { PropsWithChildren } from "react";
 import { CircleHelp, FileText, Home, ShieldCheck } from "lucide-react";
 import { DockItem, Navigation, PageContainer } from "@/components";
