@@ -142,7 +142,7 @@ export const portfolio: Portfolio = {
             date: '2023',
             tags: ['Android', 'Jetpack Compose', 'Kotlin'],
             source: 'https://github.com/hisuperaman/wallety',
-            website: `${window.location.origin}/wallety`,
+            website: '/wallety',
             image: '/images/projects/wallety.png',
         },
         {
@@ -151,7 +151,7 @@ export const portfolio: Portfolio = {
             date: '2026',
             tags: ['React Native', 'Expo', 'TypeScript'],
             source: 'https://github.com/hisuperaman/clockmate',
-            website: `${window.location.origin}/clockmate`,
+            website: '/clockmate',
             image: '/images/clockmate/icon.svg',
         },
     ],
