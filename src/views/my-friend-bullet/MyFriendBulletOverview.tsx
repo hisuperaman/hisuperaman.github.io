@@ -40,12 +40,12 @@ export const MyFriendBulletOverview = () =>
                         Get it on Google Play
                     </a>
                     <a
-                        href="https://github.com/hisuperaman/gamebox"
+                        href="https://aman433.pythonanywhere.com/"
                         target="_blank"
                         rel="noreferrer"
                         className="focus-ring inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-background px-6 py-3.5 font-medium text-foreground transition-colors hover:bg-secondary"
                     >
-                        Source Code <HoverArrow />
+                        Play on Web <HoverArrow />
                     </a>
                 </div>
 
