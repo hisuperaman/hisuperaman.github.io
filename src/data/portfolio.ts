@@ -98,6 +98,15 @@ export const portfolio: Portfolio = {
     ],
     projects: [
         {
+            name: 'My Friend Bullet',
+            description: 'A bullet-time stickman shooter: slow down time, dodge bullets and land headshots. Plays in the browser with a verified leaderboard, and offline on Android.',
+            date: '2026',
+            tags: ['JavaScript', 'Canvas', 'Capacitor', 'Android'],
+            source: 'https://github.com/hisuperaman/gamebox',
+            website: '/my-friend-bullet',
+            image: '/images/my-friend-bullet/icon.png',
+        },
+        {
             name: 'Index-R',
             description: 'Auto-discovers research papers and answers with traceable citations using BM25, citation-graph, and LLM reranking. Built without a vector DB using Postgres full-text search.',
             date: '2026',
@@ -153,15 +162,6 @@ export const portfolio: Portfolio = {
             source: 'https://github.com/hisuperaman/clockmate',
             website: '/clockmate',
             image: '/images/clockmate/icon.svg',
-        },
-        {
-            name: 'My Friend Bullet',
-            description: 'A bullet-time stickman shooter: slow down time, dodge bullets and land headshots. Plays in the browser with a verified leaderboard, and offline on Android.',
-            date: '2026',
-            tags: ['JavaScript', 'Canvas', 'Capacitor', 'Android'],
-            source: 'https://github.com/hisuperaman/gamebox',
-            website: '/my-friend-bullet',
-            image: '/images/my-friend-bullet/icon.png',
         },
     ],
     hackathons: [
