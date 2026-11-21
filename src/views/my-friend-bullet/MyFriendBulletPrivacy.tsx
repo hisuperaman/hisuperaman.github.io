@@ -92,7 +92,7 @@ export const MyFriendBulletPrivacy = () =>
                         7. Third-Party Links
                     </h2>
                     <ul className="ml-6 list-disc space-y-2 leading-relaxed">
-                        <li>This website may link to third-party sites such as GitHub or the Google Play Store.
+                        <li>This website may link to third-party sites such as the GameBox website or the Google Play Store.
                         </li>
                         <li>My Friend Bullet is not responsible for the privacy practices of third-party sites.
                         </li>

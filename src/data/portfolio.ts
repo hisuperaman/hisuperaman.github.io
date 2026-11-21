@@ -102,7 +102,6 @@ export const portfolio: Portfolio = {
             description: 'A bullet-time stickman shooter: slow down time, dodge bullets and land headshots. Plays in the browser with a verified leaderboard, and offline on Android.',
             date: '2026',
             tags: ['JavaScript', 'Canvas', 'Capacitor', 'Android'],
-            source: 'https://github.com/hisuperaman/gamebox',
             website: '/my-friend-bullet',
             image: '/images/my-friend-bullet/icon.png',
         },
