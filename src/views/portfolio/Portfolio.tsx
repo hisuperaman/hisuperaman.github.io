@@ -1,7 +1,8 @@
 "use client";
 
 import {portfolio} from '@/data/portfolio';
-import {Home} from "lucide-react";
+import Link from "next/link";
+import {Briefcase, Home} from "lucide-react";
 import {Avatar, DockItem, HoverArrow, Navigation} from "@/components";
 import {
     EducationRow,
@@ -11,6 +12,8 @@ import {
     SkillBadge,
     WorkRow
 } from "@/views/portfolio/components";
+import {Path} from "@/utils";
+import {RoutePaths} from "@/enums";
 
 
 export const Portfolio = () =>
@@ -87,6 +90,29 @@ export const Portfolio = () =>
                 </div>
             </PortfolioSection>
 
+            <PortfolioSection id="business" title={portfolio.sectionLabels.business} delayClass="delay-4">
+                <p className="text-muted-foreground">
+                    Run a small business in Mandi or anywhere in Himachal Pradesh? I build fast, modern websites,
+                    keep them maintained, handle local SEO and Google Business Profile, and help you grow online.
+                </p>
+                <div className="mt-5 flex flex-wrap gap-x-6 gap-y-3">
+                    <Link
+                        href="/services/"
+                        className="group inline-flex items-center gap-2 border-b border-foreground pb-1 font-display font-semibold transition-colors hover:border-primary hover:text-primary"
+                    >
+                        See my services
+                        <HoverArrow/>
+                    </Link>
+                    <Link
+                        href="/blog/"
+                        className="group inline-flex items-center gap-2 border-b border-foreground pb-1 font-display font-semibold transition-colors hover:border-primary hover:text-primary"
+                    >
+                        Read the blog
+                        <HoverArrow/>
+                    </Link>
+                </div>
+            </PortfolioSection>
+
             <PortfolioSection
                 id="contact"
                 title={portfolio.sectionLabels.contact}
@@ -114,6 +140,7 @@ export const Portfolio = () =>
                 onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
                 label="Back to top"
             />
+            <DockItem icon={Briefcase} href={Path.getExactRoutePath(RoutePaths.services)} label="Services for small businesses"/>
 
             {portfolio.socials.map((social) => {
                 const Icon = social.icon;
