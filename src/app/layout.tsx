@@ -1,11 +1,22 @@
 import type {Metadata} from "next";
 import type {ReactNode} from "react";
 import {ThemeProvider} from "@/contexts";
+import {siteUrl} from "@/data/site";
 import "@/index.css";
 
 export const metadata: Metadata = {
-    title: "Aman | Portfolio",
-    description: "Personal portfolio of Aman. Software Engineer specializing in Agentic AI and Full Stack Development, focusing on intelligent models and user-facing applications.",
+    metadataBase: new URL(siteUrl),
+    title: {
+        default: "Aman | Software Engineer & Web Developer in Mandi, Himachal Pradesh",
+        template: "%s | Aman",
+    },
+    description: "Personal portfolio of Aman, a Software Engineer and web developer in Mandi, Himachal Pradesh, specializing in Agentic AI and Full Stack Development. I also build websites and do SEO for local small businesses.",
+    openGraph: {
+        siteName: "Aman",
+        locale: "en_IN",
+        type: "website",
+        images: ["/images/avatar.jpeg"],
+    },
     icons: {
         apple: {url: "/apple-touch-icon.png", sizes: "180x180"},
         icon: [

@@ -6,6 +6,8 @@ export const RoutePaths = {
     privacyPolicy: "privacy-policy",
     terms: "terms",
     support: "support",
+    services: "services",
+    blog: "blog",
 }
 
 export type RoutePath = (typeof RoutePaths)[keyof typeof RoutePaths];

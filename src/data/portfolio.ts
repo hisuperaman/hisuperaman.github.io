@@ -35,6 +35,7 @@ export const portfolio: Portfolio = {
         skills: 'Skills',
         projects: 'My projects',
         hackathons: 'Hackathons',
+        business: 'For local businesses',
         contact: 'Get in touch',
     },
     work: [

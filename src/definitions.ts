@@ -72,6 +72,7 @@ export type Portfolio = {
         skills: string;
         projects: string;
         hackathons: string;
+        business: string;
         contact: string;
     };
     work: WorkExperience[];
@@ -85,4 +86,30 @@ export type Portfolio = {
         email: string;
         footer: string;
     };
+};
+export type Service = {
+    title: string;
+    description: string;
+    points: string[];
+    icon: ElementType;
+};
+
+export type Faq = {
+    question: string;
+    answer: string;
+};
+
+export type BlogSection = {
+    heading?: string;
+    paragraphs: string[];
+    list?: string[];
+};
+
+export type BlogPost = {
+    slug: string;
+    title: string;
+    description: string;
+    date: string;
+    keywords: string[];
+    sections: BlogSection[];
 };
