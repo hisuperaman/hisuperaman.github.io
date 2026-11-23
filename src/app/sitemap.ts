@@ -9,14 +9,15 @@ const staticRoutes = [
     "/services/",
     "/blog/",
     "/card/",
-    "/wallety/",
-    "/clockmate/",
-    "/my-friend-bullet/",
 ];
+
+const appRoutes = ["wallety", "clockmate", "my-friend-bullet"];
+const appSubRoutes = ["", "privacy-policy/", "terms/", "support/"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
     return [
         ...staticRoutes.map((route) => ({url: `${siteUrl}${route}`})),
+        ...appRoutes.flatMap((app) => appSubRoutes.map((sub) => ({url: `${siteUrl}/${app}/${sub}`}))),
         ...blogPosts.map((post) => ({url: `${siteUrl}/blog/${post.slug}/`, lastModified: post.date})),
     ];
 }
